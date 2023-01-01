@@ -2,6 +2,7 @@ use std::path::Path;
 
 use super::{TiffFile, TiffParserError};
 
+#[derive(Debug)]
 pub struct GeoTiff {
     tiff: TiffFile,
 }

@@ -129,8 +129,10 @@ impl Ifd {
                 &buf[offset..offset + count]
             })
             .map(|enc_tile| {
-                create_decompressor(compression)
-                    .and_then(|mut decompressor| decompressor.decompress(enc_tile))
+                create_decompressor(compression).and_then(|mut decompressor| {
+                    decompressor
+                        .decompress(enc_tile, tile_width * tile_length * bits_per_sample / 8)
+                })
             })
             .collect::<Result<Vec<_>, _>>()?;
 
